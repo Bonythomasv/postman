@@ -1,0 +1,20 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Response time is less than 60s", function () {
+    pm.expect(pm.response.responseTime).to.be.below(60000);
+});
+
+pm.test("Response Body contains variantID, RetailUpc, Description", function () {
+    pm.expect(pm.response.text()).to.include("VariantId");
+    pm.expect(pm.response.text()).to.include("RetailUpc");
+    pm.expect(pm.response.text()).to.include("Description");
+    
+});
+
+pm.test("Response is JSON Object", function () {
+    var jsonData = pm.response.json();
+    pm.expect(typeof(jsonData)).to.equal('object');
+    // pm.expect(jsonData.length).to.be.greaterThan(0);
+});
